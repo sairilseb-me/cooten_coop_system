@@ -28,23 +28,34 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                        <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
+                                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
+                                    </div>
+                                    
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">Select Role</button>
+                                          <div class="dropdown-menu" id="selected-role">
+                                            <li class="dropdown-item" value="admin" style="cursor:pointer">Admin</li>
+                                            <li class="dropdown-item" value="user"  style="cursor:pointer">User</li>
+                                          </div>
+                                        </div>
+                                        <input type="text" class="form-control" id="role-label" name="role" placeholder="{{ __('Role') }}" value="{{ old('last_name') }}" required>
+                                      </div>
+
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required>
+                                        <input type="password" class="form-control" name="password" placeholder="{{ __('Password') }}" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
+                                        <input type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -69,4 +80,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#selected-role li').on('click', function(e){
+            $('#role-label').val($(this).text())
+        })
+    </script>
 @endsection
