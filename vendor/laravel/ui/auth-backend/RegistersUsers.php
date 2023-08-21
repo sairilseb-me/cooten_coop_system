@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Role;
 
 trait RegistersUsers
 {
@@ -18,7 +19,8 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        $roles = Role::all();
+        return view('auth.register')->with('roles', $roles);
     }
 
     /**
@@ -31,13 +33,20 @@ trait RegistersUsers
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        $createUser = $this->create($request->all());
 
-        $this->guard()->login($user);
+        // if($createUser){
+        //     session()->flash('success', 'Successfully created a user.');
+        //     return view('home');
+        // }
 
-        if ($response = $this->registered($request, $user)) {
-            return $response;
-        }
+        // $this->guard()->login($user);
+
+        // if ($response = $this->registered($request, $user)) {
+        //     return $response;
+        // }
+
+        session()->flash('success', 'Successfully created a user.');
 
         return $request->wantsJson()
                     ? new JsonResponse([], 201)

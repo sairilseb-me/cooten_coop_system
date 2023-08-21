@@ -47,11 +47,16 @@
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
 
-        <li class="nav-item {{ Nav::isRoute('register') }}">
-            <a class="nav-link" href="{{ route('register') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Register User') }}</span></a>
-        </li>
+
+        
+        @if(auth()->user()->isAdmin())
+            <li class="nav-item {{ Nav::isRoute('register') }}">
+                <a class="nav-link" href="{{ route('register') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Register User') }}</span></a>
+            </li>
+        @endif
+        
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -69,6 +74,7 @@
             </a>
         </li>
 
+        
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">
             <a class="nav-link" href="{{ route('about') }}">
@@ -292,7 +298,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Alejandro RH {{ now()->year }}</span>
+                    <span>Copyright &copy; Cyril Seberiaga {{ now()->year }}</span>
                 </div>
             </div>
         </footer>
