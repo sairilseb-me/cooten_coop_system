@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -17,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'email', 'password',
+        'name', 'last_name', 'role_id', 'email', 'password',
     ];
 
     /**
@@ -62,4 +63,54 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'id', 'role_id');
+    }
+
+    public function isAdmin()
+    {
+        if($this->role_id == 1) return true;
+        
+        return false;
+    }
+
+    public function isSecretary()
+    {
+        if($this->role_id == 2) return true;
+
+        return false;
+    }
+
+    public function isAuditor()
+    {
+        if($this->role_id == 3) return true;
+
+        return false;
+    }
+
+    public function isTreasurer()
+    {
+        if($this->role_id == 4) return true;
+
+        return false;
+    }
+
+    public function isUser()
+    {
+        if($this->role_id == 5) return true;
+
+        return false;
+    }
+
+    public function updateUser(Array $data)
+    {
+        $this->name = $data['name'];
+        $this->last_name = $data['last_name'];
+        $this->role_id = (int)$data['role'];
+        $this->email = $data['email'];
+        $this->update();
+    }
+
 }

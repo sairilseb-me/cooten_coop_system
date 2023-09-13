@@ -26,25 +26,31 @@
 
                                 <form method="POST" action="{{ route('register') }}" class="user">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
+                                        <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
+                                        <input type="text" class="form-control" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                    <select name="role_id" id="select-role" class="form-control">
+                                        
+                                    </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required>
+                                        <input type="email" class="form-control" name="email" placeholder="{{ __('E-Mail Address') }}" value="{{ old('email') }}" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password" placeholder="{{ __('Password') }}" required>
+                                        <input type="password" class="form-control" name="password" placeholder="{{ __('Password') }}" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
+                                        <input type="password" class="form-control" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required>
                                     </div>
 
                                     <div class="form-group">
@@ -52,15 +58,14 @@
                                             {{ __('Register') }}
                                         </button>
                                     </div>
+
+                                    <div class="form-group">
+                                        <a href="/home" class="btn btn-secondary btn-user btn-block">Back to Home</a>
+                                    </div>
                                 </form>
 
                                 <hr>
 
-                                <div class="text-center">
-                                    <a class="small" href="{{ route('login') }}">
-                                        {{ __('Already have an account? Login!') }}
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,4 +74,29 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function(){
+            roles = {!! json_encode($roles->toArray()) !!} // pass the $roles data from blade to jQuery
+
+            $('.dropdown-item-role').remove()
+            $('#select-role').append('<option value="" class="dropdown-item-role" selected disabled style="cursor:pointer">Choose Roles</option>')
+
+            roles.forEach(role => {
+                let list = '<option class="dropdown-item-role" value="' + role.id + '" style="cursor:pointer">' + role.name + '</option>'
+                $('#select-role').append(list)
+            });
+        })
+
+        // $('#select-role').on('click', function(){
+        //     $('.dropdown-item-role').remove()
+        //     roles.forEach(role => {
+        //         // let list = '<li class="dropdown-item dropdown-item-role" id="selected-item-role" value="' + role.id + '" style="cursor:pointer">' + role.name + '</li>'
+        //         // $('#selected-role').append(list)
+                
+        //     });
+        // })
+    </script>
 @endsection

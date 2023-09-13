@@ -34,7 +34,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">Cooten Coop System</div>
         </a>
 
         <!-- Divider -->
@@ -46,6 +46,24 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
+
+
+        
+        @if(auth()->user()->isAdmin())
+            <li class="nav-item {{ Nav::isRoute('admin.index') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Admin Settings') }}</span></a>
+            </li>
+        @endif
+
+
+        <li class="nav-item {{ Nav::isRoute('loans.index') }}">
+            <a class="nav-link" href="{{ route('loans.index') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Loans') }}</span></a>
+        </li>
+        
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -63,6 +81,7 @@
             </a>
         </li>
 
+        
         <!-- Nav Item - About -->
         <li class="nav-item {{ Nav::isRoute('about') }}">
             <a class="nav-link" href="{{ route('about') }}">
@@ -286,7 +305,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Alejandro RH {{ now()->year }}</span>
+                    <span>Copyright &copy; Cyril Seberiaga {{ now()->year }}</span>
                 </div>
             </div>
         </footer>
@@ -326,8 +345,9 @@
 
 <!-- Scripts -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+@yield('script')
 </body>
 </html>
