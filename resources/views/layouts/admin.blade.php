@@ -50,12 +50,19 @@
 
         
         @if(auth()->user()->isAdmin())
-            <li class="nav-item {{ Nav::isRoute('register') }}">
-                <a class="nav-link" href="{{ route('register') }}">
+            <li class="nav-item {{ Nav::isRoute('admin.index') }}">
+                <a class="nav-link" href="{{ route('admin.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('Register User') }}</span></a>
+                    <span>{{ __('Admin Settings') }}</span></a>
             </li>
         @endif
+
+
+        <li class="nav-item {{ Nav::isRoute('loans.index') }}">
+            <a class="nav-link" href="{{ route('loans.index') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Loans') }}</span></a>
+        </li>
         
 
         <!-- Divider -->

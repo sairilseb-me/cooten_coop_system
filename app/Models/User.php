@@ -64,19 +64,53 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
 
-    public function Role()
+    public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
     public function isAdmin()
     {
-        if($this->role_id == 1)
-        {
-            return true;
-        }
+        if($this->role_id == 1) return true;
+        
+        return false;
+    }
+
+    public function isSecretary()
+    {
+        if($this->role_id == 2) return true;
 
         return false;
+    }
+
+    public function isAuditor()
+    {
+        if($this->role_id == 3) return true;
+
+        return false;
+    }
+
+    public function isTreasurer()
+    {
+        if($this->role_id == 4) return true;
+
+        return false;
+    }
+
+    public function isUser()
+    {
+        if($this->role_id == 5) return true;
+
+        return false;
+    }
+
+    public function updateUser(Array $data)
+    {
+        $this->name = $data['name'];
+        $this->last_name = $data['last_name'];
+        $this->role_id = (int)$data['role'];
+        $this->email = $data['email'];
+        $this->update();
     }
 
 }
