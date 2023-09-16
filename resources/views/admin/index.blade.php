@@ -23,7 +23,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Loan Settings</h5>
                         <p class="card-text">Create loans, add , edit and delete</p>
-                        <a href="/user" class="btn btn-primary">Go to Loan Settings</a>
+                        <a href="/admin/loan" class="btn btn-primary">Go to Loan Settings</a>
                     </div>
                     </div>
                 </div>
