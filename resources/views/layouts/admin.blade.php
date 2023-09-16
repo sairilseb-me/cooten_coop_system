@@ -58,13 +58,6 @@
         @endif
 
 
-        <li class="nav-item {{ Nav::isRoute('loans.index') }}">
-            <a class="nav-link" href="{{ route('loans.index') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Loans') }}</span></a>
-        </li>
-        
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 
