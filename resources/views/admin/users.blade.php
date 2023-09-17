@@ -86,6 +86,14 @@
                         <select name="role" id="select-role" class="form-control"></select>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="contact-number">Contact Number</label>
+                        <input type="text" name="contact_number" id="contact-number" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="address">Address</label>
+                        <textarea name="address" id="address" cols="30" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="email">Email</label>
                         <input type="text" name="email" id="email" class="form-control">
                     </div>
@@ -163,6 +171,8 @@
                 $('#last_name').val(user.last_name)
                 $('#select-role').val(user.role_id)
                 $('#email').val(user.email)
+                $('#address').val(user.address)
+                $('#contact-number').val(user.contact_number)
             }
 
         })

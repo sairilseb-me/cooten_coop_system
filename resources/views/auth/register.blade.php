@@ -46,6 +46,14 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <input type="text" class="form-control" name="contact_number" placeholder="{{ __('Contact Number') }}" value="{{ old('contact_number') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <textarea name="address" id="address" placeholder="{{ __('Address') }}" value="{{ old('address') }}" cols="30" rows="3" class="form-control"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
                                         <input type="password" class="form-control" name="password" placeholder="{{ __('Password') }}" required>
                                     </div>
 

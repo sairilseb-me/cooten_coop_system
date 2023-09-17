@@ -53,6 +53,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'role_id' => ['required', 'numeric'],
+            'address' => ['required', 'string'],
+            'contact_number' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
         ]);
@@ -70,6 +72,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'role_id' => $data['role_id'],
+            'address' => $data['address'],
+            'contact_number' => $data['contact_number'],
             'email' => $data['email'],
             'password' => $data['password'],
         ]);

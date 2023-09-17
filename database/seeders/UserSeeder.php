@@ -17,6 +17,8 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'last_name' => 'admin',
             'role_id' => 1,
+            'address' => 'San Miguel Jordan Guimaras',
+            'contact_number' => '09899202902',
             'email' => 'admin@gmail.com',
             'password' => '12345'
         ]);
