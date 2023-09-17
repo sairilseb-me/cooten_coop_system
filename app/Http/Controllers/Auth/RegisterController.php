@@ -52,6 +52,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'profile_pic' => ['sometimes | mimes: jpeg,jpg,png,gif|max: 10000'],
             'role_id' => ['required', 'numeric'],
             'address' => ['required', 'string'],
             'contact_number' => ['required', 'string'],
@@ -71,6 +72,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
+            'profile_pic' => $data['profile_pic'] ?? 'blank-avatar.png',
             'role_id' => $data['role_id'],
             'address' => $data['address'],
             'contact_number' => $data['contact_number'],

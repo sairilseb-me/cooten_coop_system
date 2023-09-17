@@ -47,8 +47,6 @@
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
 
-
-        
         @if(auth()->user()->isAdmin())
             <li class="nav-item {{ Nav::isRoute('admin.index') }}">
                 <a class="nav-link" href="{{ route('admin.index') }}">
@@ -56,6 +54,12 @@
                     <span>{{ __('Admin Settings') }}</span></a>
             </li>
         @endif
+
+        <li class="nav-item {{ Nav::isRoute('personal.home') }}">
+            <a class="nav-link" href="{{ route('personal.home') }}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>{{ __('Personal') }}</span></a>
+        </li>
 
 
         <!-- Divider -->

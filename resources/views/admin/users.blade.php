@@ -63,7 +63,7 @@
 <div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="/admin/user/" method="POST" id="edit-form">
+        <form action="/admin/user/" method="POST" id="edit-form" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="PUT">
             <div class="modal-header">
@@ -81,6 +81,17 @@
                         <label for="last_name">Last Name</label>
                         <input type="text" name="last_name" id="last_name" class="form-control">
                     </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="image-input">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="profile_pic" id="image-input" aria-describedby="image-input" value="{{ old('profile_pic') }}" style="cursor: pointer">
+                          <label class="custom-file-label" for="image-input">Choose file</label>
+                        </div>
+                    </div>
+
                     <div class="form-group mb-3">
                         <label for="roles">Select Role</label>
                         <select name="role" id="select-role" class="form-control"></select>
@@ -173,6 +184,7 @@
                 $('#email').val(user.email)
                 $('#address').val(user.address)
                 $('#contact-number').val(user.contact_number)
+                $('.custom-file-label').text(user.profile_pic)
             }
 
         })

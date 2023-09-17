@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\UserControler;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,12 +30,13 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::put('/profile', 'ProfileController@update')->name('profile.update');
 
 Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/user', UserControler::class);
     Route::resource('/loan', LoanController::class);
 });
 
-Route::middleware('auth')->group(function() {
-    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::prefix('personal')->middleware('auth')->group(function() {
+    Route::get('/', [PersonalController::class, 'index'])->name('personal.home');
 });
 
 Route::get('/about', function () {

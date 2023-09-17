@@ -24,7 +24,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('register') }}" class="user">
+                                <form method="POST" action="{{ route('register') }}" class="user" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="name" placeholder="{{ __('Name') }}" value="{{ old('name') }}" required autofocus>
@@ -34,6 +34,15 @@
                                         <input type="text" class="form-control" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
                                     </div>
                                     
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="image-input">Upload</span>
+                                        </div>
+                                        <div class="custom-file">
+                                          <input type="file" class="custom-file-input" name="profile_pic" id="image-input" aria-describedby="image-input" value="{{ old('profile_pic') }}" style="cursor: pointer">
+                                          <label class="custom-file-label" for="image-input">Choose file</label>
+                                        </div>
+                                    </div>
 
                                     <div class="form-group">
                                     <select name="role_id" id="select-role" class="form-control">
