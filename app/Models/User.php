@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'profile_pic', 'role_id', 'address', 'contact_number', 'email', 'password',
+        'name', 'last_name', 'profile_pic', 'date_of_birth', 'role_id', 'office_id', 'address', 'contact_number', 'email', 'password',
     ];
 
     /**
@@ -97,9 +97,9 @@ class User extends Authenticatable
         return false;
     }
 
-    public function isUser()
+    public function isMember()
     {
-        if($this->role_id == 5) return true;
+        if($this->role_id == 12) return true;
 
         return false;
     }

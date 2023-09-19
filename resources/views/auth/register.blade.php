@@ -33,6 +33,10 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="last_name" placeholder="{{ __('Last Name') }}" value="{{ old('last_name') }}" required>
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="date" name="date_of_birth" id="date-of-birth" class="form-control" placeholder="{{ __('Date Of Birth') }}" value="{{ old('date_of_birth') }}">
+                                    </div>
                                     
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -42,6 +46,12 @@
                                           <input type="file" class="custom-file-input" name="profile_pic" id="image-input" aria-describedby="image-input" value="{{ old('profile_pic') }}" style="cursor: pointer">
                                           <label class="custom-file-label" for="image-input">Choose file</label>
                                         </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select name="office_id" id="select-office" class="form-control">
+                                            
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -96,16 +106,30 @@
 @section('script')
     <script>
         $(document).ready(function(){
-            roles = {!! json_encode($roles->toArray()) !!} // pass the $roles data from blade to jQuery
+            let roles = {!! json_encode($roles->toArray()) !!} // pass the $roles data from blade to jQuery
+            let offices = {!! json_encode($offices->toArray()) !!}
 
+            $('.dropdown-item-office').remove()
             $('.dropdown-item-role').remove()
-            $('#select-role').append('<option value="" class="dropdown-item-role" selected disabled style="cursor:pointer">Choose Roles</option>')
-
+            $('#select-role').append('<option value="" class="dropdown-item-role" selected disabled style="cursor:pointer">Choose Role</option>')
+            $('#select-office').append('<option value="" class="dropdown-item-office" selected disabled style="cursor:pointer">Choose Office</option>')
             roles.forEach(role => {
                 let list = '<option class="dropdown-item-role" value="' + role.id + '" style="cursor:pointer">' + role.name + '</option>'
                 $('#select-role').append(list)
             });
+
+            offices.forEach(office => {
+                let list = '<option class="dropdown-item-office" value="' + office.id + '">' + office.name + '</option>'
+                $('#select-office').append(list);
+            })
+
+            $('input[type="file"]').on('change', function(e){
+                let image_name = e.target.files[0].name
+                $('.custom-file-label').text(image_name)
+            })
         })
+
+        
 
         // $('#select-role').on('click', function(){
         //     $('.dropdown-item-role').remove()

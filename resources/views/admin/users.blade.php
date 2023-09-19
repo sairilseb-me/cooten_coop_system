@@ -176,6 +176,13 @@
                 $('#delete-form').attr('action', '/admin/user/' + user.id)
             })
 
+            $('input[type="file"]').change(function(e){
+                console.log('Test')
+                console.log(e)
+                let filename = $(e.target.files[0].name)
+                
+            })
+
             function fillUserData(user) // Fill up the inputs with users data
             {
                 $('#name').val(user.name)

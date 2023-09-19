@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use App\Models\Office;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -20,7 +21,8 @@ trait RegistersUsers
     public function showRegistrationForm()
     {
         $roles = Role::all();
-        return view('auth.register')->with('roles', $roles);
+        $offices = Office::all();
+        return view('auth.register')->with(['roles' => $roles, 'offices' => $offices]);
     }
 
     /**

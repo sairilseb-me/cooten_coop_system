@@ -14,10 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
+        $date = date_create('1985-09-14');
         User::create([
             'name' => 'admin',
             'last_name' => 'admin',
+            'date_of_birth' => $date,
             'role_id' => 1,
+            'office_id' => 2,
             'profile_pic' => 'avatar-sample.png',
             'address' => 'San Miguel Jordan Guimaras',
             'contact_number' => '09899202902',

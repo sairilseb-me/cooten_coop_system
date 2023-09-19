@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\LoanController;
+use App\Http\Controllers\LoanTypeController;
+use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\UserControler;
+use App\Models\CootenPosition;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +34,8 @@ Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::resource('/user', UserControler::class);
-    Route::resource('/loan', LoanController::class);
+    Route::resource('/loan', LoanTypeController::class);
+    Route::resource('/office', OfficeController::class);
 });
 
 Route::prefix('personal')->middleware('auth')->group(function() {
