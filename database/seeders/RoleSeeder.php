@@ -13,7 +13,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $role_lists = ['Admin', 'Secretary', 'Auditor', 'Treasurer', 'User'];
+        $role_lists = ['Admin', 'General Manager', 'Assistant GM', 'Secretary', 'Assistant Secretary', 'Auditor', 'Business Manager', 'Treasurer', 'Assistant Treasurer', 'Grievance', 'Assistant Collector', 'Member'];
 
         foreach($role_lists as $role)
         {

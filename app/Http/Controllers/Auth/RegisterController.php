@@ -52,7 +52,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date'],
+            'profile_pic' => ['sometimes', 'mimes: jpeg,jpg,png,gif|max: 10000'],
             'role_id' => ['required', 'numeric'],
+            'office_id' => ['required', 'numeric'],
+            'address' => ['required', 'string'],
+            'contact_number' => ['required', 'string'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
         ]);
@@ -66,10 +71,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $profile_pic = '';
+
+        if($data['profile_pic']){
+            $image = $data['profile_pic'];
+            $profile_pic = $image->getClientOriginalName();
+        }
+
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
+            'date_of_birth' => $data['date_of_birth'],
+            'profile_pic' => $profile_pic ?? 'blank-avatar.png',
             'role_id' => $data['role_id'],
+            'office_id' => $data['office_id'],
+            'address' => $data['address'],
+            'contact_number' => $data['contact_number'],
             'email' => $data['email'],
             'password' => $data['password'],
         ]);

@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'role_id', 'email', 'password',
+        'name', 'last_name', 'profile_pic', 'date_of_birth', 'role_id', 'office_id', 'address', 'contact_number', 'email', 'password',
     ];
 
     /**
@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
+    public function office()
+    {
+        return $this->hasOne(Office::class, 'id', 'user_id');
+    }
+
     public function isAdmin()
     {
         if($this->role_id == 1) return true;
@@ -97,9 +102,9 @@ class User extends Authenticatable
         return false;
     }
 
-    public function isUser()
+    public function isMember()
     {
-        if($this->role_id == 5) return true;
+        if($this->role_id == 12) return true;
 
         return false;
     }
@@ -109,6 +114,8 @@ class User extends Authenticatable
         $this->name = $data['name'];
         $this->last_name = $data['last_name'];
         $this->role_id = (int)$data['role'];
+        $this->address = $data['address'];
+        $this->contact_number = $data['contact_number'];
         $this->email = $data['email'];
         $this->update();
     }

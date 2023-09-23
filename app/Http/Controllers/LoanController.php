@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LoanType;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 
 class LoanController extends Controller
@@ -12,16 +12,32 @@ class LoanController extends Controller
      */
     public function index()
     {
-        $loan_types = LoanType::all();
-        return view('admin.loans')->with('loan_types', $loan_types);
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        
+        $validate = $request->validate([
+            'user_id' => 'required|numeric',
+            'loan_type' => 'required|numeric',
+            'loan_amount' => 'required|numeric',
+            'reason' => 'required|string'
+        ]);
+
+        $loan = Loan::create([
+            'applicant_id' => $request->input('user_id'),
+            'loan_type_id' => $request->input('loan_type'),
+            'loan_request_status' => 0,
+            'payment_status' => 0,
+            'loan_amount' => $request->input('loan_amount'),
+            'date_applied' => date('Y-m-d H:i:s'),
+            'reason' => $request->input('reason')
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully applied for a loan.');
     }
 
     /**
@@ -29,21 +45,13 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'loan' => 'required|string',
-        ]);
-
-        $loan_type = LoanType::create([
-            'name' => $request->input('loan'),
-        ]);
-
-        return redirect()->back()->with('success', 'Successfully added new Loan Type.');
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(LoanType $loan)
+    public function show(Loan $loan)
     {
         //
     }
@@ -51,7 +59,7 @@ class LoanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LoanType $loan)
+    public function edit(Loan $loan)
     {
         //
     }
@@ -59,25 +67,16 @@ class LoanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LoanType $loan)
+    public function update(Request $request, Loan $loan)
     {
-        $validated = $request->validate([
-            'loan' => 'required|string',
-        ]);
-
-        $loan->name = $request->input('loan');
-        $loan->update();
-
-        return redirect()->back()->with('success', 'Successfully updated a Loan Type.');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LoanType $loan)
+    public function destroy(Loan $loan)
     {
-        $loan->delete();
-
-        return redirect()->back()->with('success', 'Successfully delete a Loan Type.');
+        //
     }
 }
