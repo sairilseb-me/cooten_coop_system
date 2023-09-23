@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\LoanTypeController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PersonalController;
@@ -39,6 +40,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
 });
 
 Route::prefix('personal')->middleware('auth')->group(function() {
+    Route::post('/loan-apply', [LoanController::class, 'create']);
     Route::get('/', [PersonalController::class, 'index'])->name('personal.home');
 });
 

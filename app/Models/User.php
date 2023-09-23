@@ -69,6 +69,11 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
 
+    public function office()
+    {
+        return $this->hasOne(Office::class, 'id', 'user_id');
+    }
+
     public function isAdmin()
     {
         if($this->role_id == 1) return true;

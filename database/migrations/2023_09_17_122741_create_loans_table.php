@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('applicant_id');
+            $table->foreign('applicant_id')->references('id')->on('users');
             $table->unsignedBigInteger('loan_type_id');
-            $table->unsignedBigInteger('approved_by_id')->nullable();
             $table->foreign('loan_type_id')->references('id')->on('loan_types');
-            $table->foreign('approved_by_id')->references('id')->on('users');
-            $table->float('amount', 10, 2);
+            $table->integer('loan_request_status')->default(0);
+            $table->string('approved_by')->nullable();
+            $table->integer('payment_status')->nullable();
+            $table->float('loan_amount', 10, 2);
             $table->dateTime('date_applied');
             $table->dateTime('date_approved')->nullable();
             $table->dateTime('date_released')->nullable();
             $table->text('reason')->nullable();
             $table->text('remarks')->nullable();
-            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });

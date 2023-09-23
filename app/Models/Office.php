@@ -12,4 +12,10 @@ class Office extends Model
 
     protected $table = 'offices';
     protected $fillable = ['name'];
+    
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
+    }
 }

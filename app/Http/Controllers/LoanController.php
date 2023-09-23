@@ -18,9 +18,26 @@ class LoanController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'user_id' => 'required|numeric',
+            'loan_type' => 'required|numeric',
+            'loan_amount' => 'required|numeric',
+            'reason' => 'required|string'
+        ]);
+
+        $loan = Loan::create([
+            'applicant_id' => $request->input('user_id'),
+            'loan_type_id' => $request->input('loan_type'),
+            'loan_request_status' => 0,
+            'payment_status' => 0,
+            'loan_amount' => $request->input('loan_amount'),
+            'date_applied' => date('Y-m-d H:i:s'),
+            'reason' => $request->input('reason')
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully applied for a loan.');
     }
 
     /**
