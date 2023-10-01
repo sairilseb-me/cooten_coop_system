@@ -79,4 +79,10 @@ class LoanController extends Controller
     {
         //
     }
+
+    public function loanApplications()
+    {
+        $loans = Loan::with(['user', 'loan_type'])->get();
+        return view('loans.application')->with('loans', $loans);
+    }
 }

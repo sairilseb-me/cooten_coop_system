@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role;
+use Illuminate\Support\Facades\Storage;
 
 trait RegistersUsers
 {
@@ -36,6 +37,13 @@ trait RegistersUsers
         $this->validator($request->all())->validate();
 
         $createUser = $this->create($request->all());
+
+        $file = $request->file('profile_pic');
+        $filename = $file->getClientOriginalName();
+
+        $storage = Storage::disk('local');
+        
+        $path = $storage->putFileAs('public/images/profile', $file, $filename);
 
         // if($createUser){
         //     session()->flash('success', 'Successfully created a user.');

@@ -28,4 +28,9 @@ class Loan extends Model
     {
         return $this->hasOne(LoanType::class, 'id', 'loan_type_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'applicant_id', 'id');
+    }
 }

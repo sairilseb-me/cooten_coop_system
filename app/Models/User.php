@@ -74,6 +74,11 @@ class User extends Authenticatable
         return $this->hasOne(Office::class, 'id', 'user_id');
     }
 
+    public function loan()
+    {
+        return $this->hasMany(Loan::class, 'id', 'applicant_id');
+    }
+
     public function isAdmin()
     {
         if($this->role_id == 1) return true;
@@ -90,14 +95,14 @@ class User extends Authenticatable
 
     public function isAuditor()
     {
-        if($this->role_id == 3) return true;
+        if($this->role_id == 6) return true;
 
         return false;
     }
 
     public function isTreasurer()
     {
-        if($this->role_id == 4) return true;
+        if($this->role_id == 8) return true;
 
         return false;
     }

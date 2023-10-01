@@ -44,6 +44,10 @@ Route::prefix('personal')->middleware('auth')->group(function() {
     Route::get('/', [PersonalController::class, 'index'])->name('personal.home');
 });
 
+Route::middleware(['auth', 'auth.isAuditorOrTreasurer'])->group(function(){
+    Route::get('/loan-application', [LoanController::class, 'loanApplications'])->name('loan.application');
+});
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');

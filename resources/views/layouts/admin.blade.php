@@ -61,6 +61,17 @@
                 <span>{{ __('Personal') }}</span></a>
         </li>
 
+        @if(auth()->user()->isTreasurer() || auth()->user()->isAuditor())
+            <li class="nav-item {{ Nav::isRoute('loan.application') }}">
+                <a class="nav-link" href="{{ route('loan.application') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Loan Applications') }}</span></a>
+            </li>
+        @endif
+       
+
+
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">
